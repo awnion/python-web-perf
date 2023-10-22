@@ -1,9 +1,9 @@
-name: Pylint
+name: Profile wrk
 
 on: [push]
 
 jobs:
-  build:
+  wrk:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,10 +16,11 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        cargo install wrk
+        sudo apt update -q
+        sudo apt install -yq wrk
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Analysing the code with pylint
+    - name: Run wrk
       env:
         PORT: 5050
       run: |
