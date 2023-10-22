@@ -1,3 +1,4 @@
+import os
 from robyn import Robyn
 from robyn import jsonify
 
@@ -14,4 +15,6 @@ async def json():
     return jsonify({"hello": "word"})
 
 
-app.start(port=8000)
+if __name__ == "__main__":
+    port = os.environ.get("PORT", 5001)
+    app.start(port=port)

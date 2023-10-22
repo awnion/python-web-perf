@@ -1,16 +1,19 @@
-# Performance Test
+# FastAPI: Performance Test on MacBook Pro M2
 
-## Spec
+<details>
+    <summary>Spec</summary>
 
 ```yaml
 CPU:    Apple M2 Max
-Memory: 7224MiB / 32768MiB
+Memory: 32768MiB
 OS:     macOS 14.0 23A344 arm64
 Host:   Mac14,5
 Kernel: 23.0.0
 ```
+</details>
 
-## Versions
+<details>
+    <summary>pip list</summary>
 
 ```text
 Package           Version
@@ -40,84 +43,101 @@ watchfiles        0.21.0
 websockets        12.0
 ```
 
+</details>
+
 ## test 1
 
-```haskell
-===========================================================
-Test: python3.10
-===========================================================
-Running 15s test @ http://localhost:5007
-  4 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     2.90ms    5.79ms 138.86ms   91.95%
-    Req/Sec    34.75k     3.86k   45.31k    66.17%
-  2074517 requests in 15.01s, 259.17MB read
-  Socket errors: connect 0, read 65, write 0, timeout 0
-Requests/sec: 138243.38
-Transfer/sec:     17.27MB
-===========================================================
-Test: python3.11
-===========================================================
-Running 15s test @ http://localhost:5007
-  4 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     2.76ms    5.39ms 132.78ms   91.37%
-    Req/Sec    36.82k     4.32k   78.96k    83.69%
-  2202440 requests in 15.10s, 275.15MB read
-  Socket errors: connect 0, read 63, write 0, timeout 0
-Requests/sec: 145838.81
-Transfer/sec:     18.22MB
-===========================================================
-Test: python3.12
-===========================================================
-Running 15s test @ http://localhost:5007
-  4 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     3.24ms    6.28ms  96.71ms   90.33%
-    Req/Sec    36.91k     5.73k   56.92k    76.83%
-  2206726 requests in 15.06s, 275.69MB read
-  Socket errors: connect 0, read 63, write 0, timeout 0
-Requests/sec: 146501.26
-Transfer/sec:     18.30MB
+```bash
+./run_mac.sh
 ```
 
-## test 2 (json endpoint)
-
 ```haskell
-===========================================================
-Test: python3.10
-===========================================================
-Running 15s test @ http://localhost:5008/json
-  4 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     2.99ms    6.56ms 138.07ms   93.50%
-    Req/Sec    32.42k     2.78k   42.62k    68.54%
-  1949199 requests in 15.10s, 263.96MB read
-  Socket errors: connect 0, read 65, write 0, timeout 0
-Requests/sec: 129046.92
-Transfer/sec:     17.48MB
-===========================================================
-Test: python3.11
-===========================================================
-Running 15s test @ http://localhost:5008/json
-  4 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     2.54ms    4.69ms 129.10ms   91.77%
-    Req/Sec    35.40k     2.64k   63.70k    80.07%
-  2119702 requests in 15.10s, 287.05MB read
-  Socket errors: connect 0, read 65, write 0, timeout 0
-Requests/sec: 140365.09
-Transfer/sec:     19.01MB
 ===========================================================
 Test: python3.12
 ===========================================================
-Running 15s test @ http://localhost:5008/json
+Running 15s test @ http://localhost:5002
   4 threads and 200 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     2.74ms    5.69ms 156.64ms   92.42%
-    Req/Sec    35.67k     4.24k   49.42k    83.25%
-  2140803 requests in 15.10s, 289.91MB read
-  Socket errors: connect 0, read 63, write 0, timeout 0
-Requests/sec: 141741.16
-Transfer/sec:     19.19MB
+    Latency     1.21ms  563.62us  10.75ms   66.61%
+    Req/Sec    38.52k     1.92k   42.72k    72.00%
+  2300134 requests in 15.01s, 287.36MB read
+Requests/sec: 153288.32
+Transfer/sec:     19.15MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.22ms  647.25us  11.65ms   68.70%
+    Req/Sec    37.77k     5.72k  130.17k    77.04%
+  2258614 requests in 15.10s, 305.87MB read
+Requests/sec: 149552.46
+Transfer/sec:     20.25MB
+===========================================================
+Test: python3.11
+===========================================================
+Running 15s test @ http://localhost:5002
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.96ms    4.19ms  86.22ms   95.75%
+    Req/Sec    36.61k    11.54k   83.23k    66.67%
+  2185632 requests in 15.02s, 273.05MB read
+Requests/sec: 145533.63
+Transfer/sec:     18.18MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.67ms    5.78ms 106.02ms   93.92%
+    Req/Sec    33.62k     8.46k   70.14k    68.11%
+  2014264 requests in 15.10s, 272.78MB read
+  Socket errors: connect 0, read 14, write 0, timeout 0
+Requests/sec: 133378.17
+Transfer/sec:     18.06MB
+```
+
+## test 2 (reverse order)
+
+```bash
+./run_mac.sh
+```
+
+```haskell
+===========================================================
+Test: python3.11
+===========================================================
+Running 15s test @ http://localhost:5002
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     5.43ms   13.00ms 119.09ms   91.66%
+    Req/Sec    34.99k    17.23k  115.38k    76.73%
+  2090416 requests in 15.08s, 261.16MB read
+Requests/sec: 138663.49
+Transfer/sec:     17.32MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.46ms    1.08ms   9.54ms   53.11%
+    Req/Sec    33.77k     2.72k   49.01k    60.86%
+  2026273 requests in 15.10s, 274.40MB read
+  Socket errors: connect 0, read 3, write 0, timeout 0
+Requests/sec: 134179.32
+Transfer/sec:     18.17MB
+===========================================================
+Test: python3.12
+===========================================================
+Running 15s test @ http://localhost:5002
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.30ms  604.02us   8.18ms   63.95%
+    Req/Sec    36.62k     2.66k   41.18k    51.82%
+  2200720 requests in 15.10s, 274.94MB read
+  Socket errors: connect 0, read 25, write 0, timeout 0
+Requests/sec: 145706.06
+Transfer/sec:     18.20MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     7.06ms   15.39ms 176.99ms   89.99%
+    Req/Sec    33.47k    16.70k  121.84k    73.68%
+  1998417 requests in 15.09s, 270.63MB read
+Requests/sec: 132413.12
+Transfer/sec:     17.93MB
 ```
