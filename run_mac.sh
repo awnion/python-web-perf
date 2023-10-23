@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # check if wrk is installed
-which wrk || exit 1
+which wrk || {
+    echo "wrk is not installed"
+    echo "Install it with:"
+    echo "  $ brew install wrk"
+    exit 1
+}
 
 : "${PORT:=5002}"
 

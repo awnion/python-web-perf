@@ -141,3 +141,53 @@ Running 15s test @ http://localhost:5002/json
 Requests/sec: 132413.12
 Transfer/sec:     17.93MB
 ```
+
+## test 3 (linux with linux brew)
+
+CPU: AMD Ryzen 9 5900HX with Radeon Graphics (16) @ 4.680GHz
+
+```bash
+./run_mac.sh
+```
+
+
+```haskell
+===========================================================
+Test: python3.12
+===========================================================
+Running 15s test @ http://localhost:5002
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.00ms    1.52ms  26.39ms   87.23%
+    Req/Sec    24.68k     2.16k   31.82k    69.67%
+  1477027 requests in 15.05s, 184.53MB read
+Requests/sec:  98119.71
+Transfer/sec:     12.26MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.22ms    1.62ms  29.90ms   86.34%
+    Req/Sec    22.51k     1.69k   30.12k    69.33%
+  1349396 requests in 15.08s, 182.74MB read
+Requests/sec:  89458.09
+Transfer/sec:     12.11MB
+===========================================================
+Test: python3.11
+===========================================================
+Running 15s test @ http://localhost:5002
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.89ms    1.25ms  27.88ms   82.56%
+    Req/Sec    25.55k     2.04k   34.38k    70.50%
+  1528780 requests in 15.05s, 190.99MB read
+Requests/sec: 101578.05
+Transfer/sec:     12.69MB
+Running 15s test @ http://localhost:5002/json
+  4 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.09ms    1.35ms  24.62ms   81.12%
+    Req/Sec    23.08k     1.92k   32.03k    71.83%
+  1382162 requests in 15.07s, 187.17MB read
+Requests/sec:  91713.92
+Transfer/sec:     12.42MB
+```
