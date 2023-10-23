@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # check if wrk is installed
-which wrk
+which wrk || exit 1
 
 : "${PORT:=5002}"
 
-for python in python3.{11,12} ; do
+PYTHONS=$(echo python3.{12,11})
+
+for python in $PYTHONS ; do
     if ! which "$python"; then continue; fi
 
     $python -m venv venv_"$python"
@@ -14,7 +16,7 @@ done
 
 clear
 
-for python in python3.{11,12} ; do
+for python in $PYTHONS ; do
     if ! which "$python"; then continue; fi > /dev/null 2>&1
 
     echo ===========================================================
